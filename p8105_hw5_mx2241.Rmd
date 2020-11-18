@@ -89,51 +89,44 @@ results_df %>%
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1))
 ```
 
-Some other ideas:
 
-```{r, error = TRUE}
-city_prop_test = function(df) {
-  
-  n_unsovled ...
-  n_total ... 
-  
-  prop.test(.....)
-  
-}
-homicide_df = 
-  read_csv("data/homicide-data.csv") %>% 
-  mutate(
-    city_state = str_c(city, state, sep = "_"),
-    resolved = case_when(
-      disposition == "Closed without arrest" ~ "unsolved",
-      disposition == "Open/No arrest"        ~ "unsolved",
-      disposition == "Closed by arrest"      ~ "solved",
-    )
-  ) %>% 
-  select(city_state, resolved) %>% 
-  filter(city_state != "Tulsa_AL") %>% 
-  nest(data = resolved)
-```
-
-
-## Problem 2 ideas ...
+## Problem 2
 
 import one dataset 
 
 ```{r}
-data_1 = read_csv("./data/lda_data/con_01.csv")
-```
-
-```{r, error = TRUE}
 path_df = 
   tibble(
-    path = list.files("lda_data"),
+    path = list.files("data/lda_data")
   ) %>% 
   mutate(
-    path = str_c("lda_data/", path),
-    data = map(.............))
-read_csv(path_df$path[[1]])
+    path = str_c("data/lda_data/", path),
+    data = map(.x = path, ~read_csv(.x))
+  ) %>% 
+  unnest(data) %>% 
+  separate(
+    path,
+    into = c("path_prefix1", "path_prefix2", "path_prefix3", "arm", "id", "csv"),
+    sep = "([//_.])"
+  ) %>% 
+  select(
+    -path_prefix1, -path_prefix2, -path_prefix3, -csv
+    ) %>% 
+  mutate(
+    arm = case_when(
+      arm == "con" ~ "control",
+      arm == "exp" ~ "experimental"
+    ),
+    id = as.double(id)
+  ) %>% 
+  pivot_longer(
+    week_1:week_8,
+    names_prefix = "week_",
+    names_to = "week",
+    values_to = "observation"
+  )
 ```
+
 
 
 
