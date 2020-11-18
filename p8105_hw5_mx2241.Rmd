@@ -248,8 +248,13 @@ For average estimate of mu^ for all samples vs. the true value of mu plot, it sh
 
 For average estimate of mu^ for rejected nulls vs. the true value of mu, it shows that for true value of mu >= 4, the average estimate of mu^ is equal to true mean; for 1 <= true mean < 4, the average estimate of mu^ is greater than the true mean; for true mean = 0, the average estimate of mu^ is slightly below the true mean(approx. equal to true mean). 
 
-The reasoning of the trend is that the samples for null rejection(the second plot) have a power of 1. And the power for all samples: `r knitr::kable(power_df)`. As the true value of mu >= 4, power is above 0.99, which is extremely close to 1, so that for 4 <= true value of mu <= 6, the sample average of mu^ across tests for which the null is rejected approx. equal to the true value of mu. 
+The reasoning of the trend is that the samples for null rejection(the second plot) have a power of 1. And the power for all samples: `r knitr::kable(power_df)`
 
+As the true value of mu >= 4, power is above 0.99, which is extremely close to 1, and the average estimate for all samples is mostly based on "null rejecting" samples, so that for 4 <= true value of mu <= 6, the sample average of mu^ across tests for which the null is rejected approx. equal to the true value of mu. 
+
+For 1 <= the true value of mu < 4, powers of all samples are significantly lower than 1. The critical value for rejecting null hypothesis stays the same for all mu's. For 2 sided hypothesis testing, normally distributed samples for mu = 1:4, the right tail of the rejection values is heavier than left tail's, so that if there are only null rejecting samples, the average estimates are overestimated. Therefore, for 1 <= the true value of mu < 4, the sample average of mu^ across tests for which the null is rejected do not equal to the true value of mu. 
+
+For the true value of mu = 0, although powers are significantly different for all samples and "only null rejecting" samples, with the true mean of 0, the rejection region for normally distributed samples is located at tail ends, and centered around 0. So the average estimates are balanced to zero. It yields the result that for mu = 0, sample average of mu^ across tests for which the null is rejected approx. equal to the true value of mu.
 
 
 
