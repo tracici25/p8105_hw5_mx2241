@@ -145,6 +145,13 @@ lda_df %>%
     )
 ```
 
+According to the spaghetti plot above, it can be observed that observation values of experimental arm are generally higher than those of control arm; observation values of experimental arm increases faster than those of control arm for the first some weeks; control values are more stable than experimental values; from week 7, all observation values for the experimental arm are higher than those of the control arm.
+
+
+
+
+
+
 
 
 
