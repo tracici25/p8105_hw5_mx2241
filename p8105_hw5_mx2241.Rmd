@@ -8,6 +8,7 @@ output: github_document
 
 ```{r setup, include = FALSE}
 library(tidyverse)
+library(ggplot2)
 knitr::opts_chunk$set(
   fig.width = 6,
   fig.asp = .6,
@@ -95,7 +96,7 @@ results_df %>%
 import one dataset 
 
 ```{r}
-path_df = 
+lda_df = 
   tibble(
     path = list.files("data/lda_data")
   ) %>% 
@@ -127,6 +128,22 @@ path_df =
   )
 ```
 
+
+```{r}
+lda_df %>% 
+  mutate(
+    arm_id = str_c(arm, "arm", id, sep = "_")
+  ) %>% 
+  ggplot(aes(x = week, y = observation, group = arm_id, color = arm)) +
+  geom_line() +
+  geom_point(size = 1) +
+  theme_bw() +
+  labs(
+    title = "Spaghetti Plot of Observations on Each Subject over Time",
+    x = "Week",
+    y = "Observation Value"
+    )
+```
 
 
 
